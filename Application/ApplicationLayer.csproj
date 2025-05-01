@@ -6,4 +6,22 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="ACommen\Helpers\" />
+    <Folder Include="ACommen\Mappings\" />
+    <Folder Include="Interfaces\ItemInterface\" />
+    <Folder Include="Interfaces\IGenericIRepository\" />
+    <Folder Include="Interfaces\UserInterface\" />
+    <Folder Include="Interfaces\SopplierInterface\" />
+    <Folder Include="Interfaces\StockInterface\" />
+    <Folder Include="Items\Commands\CreateItems\" />
+    <Folder Include="Items\Queries\GetCurrentItems\" />
+    <Folder Include="Stocks\Commands\CreateStocks\" />
+    <Folder Include="Stocks\Queries\GetCurrentStocks\" />
+    <Folder Include="Suppliers\Queries\GetCurrentSuppliers\" />
+    <Folder Include="Suppliers\Commands\CreateSuppliers\" />
+    <Folder Include="Users\Queries\GetCurrentUsers\" />
+    <Folder Include="Users\Commands\CreateUsers\" />
+  </ItemGroup>
+
 </Project>
