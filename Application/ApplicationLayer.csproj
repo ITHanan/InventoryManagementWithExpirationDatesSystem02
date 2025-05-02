@@ -8,11 +8,9 @@
 
   <ItemGroup>
     <Folder Include="ACommen\Helpers\" />
-    <Folder Include="ACommen\Mappings\" />
     <Folder Include="Interfaces\UserInterface\" />
     <Folder Include="Interfaces\SopplierInterface\" />
     <Folder Include="Interfaces\StockInterface\" />
-    <Folder Include="Items\Commands\CreateItems\" />
     <Folder Include="Stocks\Commands\CreateStocks\" />
     <Folder Include="Stocks\Queries\GetCurrentStocks\" />
     <Folder Include="Suppliers\Queries\GetCurrentSuppliers\" />

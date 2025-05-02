@@ -22,9 +22,20 @@ namespace infrastructureLayer.Repositories
 
         public async Task<OperationResult<T>> AddAsync(T entity)
         {
-            await _dbSet.AddAsync(entity);
-            return OperationResult<T>.Success(entity);
+            try
+            {
+                await _dbSet.AddAsync(entity);
+                await _context.SaveChangesAsync();
+                return OperationResult<T>.Success(entity);
+            }
+            catch (Exception ex)
+            {
+                // This captures the deeper cause
+                var errorMessage = ex.InnerException?.Message ?? ex.Message;
+                return OperationResult<T>.Failure(errorMessage);
+            }
         }
+
 
         public async Task<OperationResult<bool>> DeleteAsync(int id)
         {
