@@ -26,6 +26,7 @@ namespace infrastructureLayer
 
             });
 
+            services.AddScoped<DbContext, AppDbContext>();
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IItemRepository, ItemRepository>();
