@@ -1,5 +1,7 @@
 ﻿using ApplicationLayer.ACommen.DTOs;
 using ApplicationLayer.Items.Commands;
+using ApplicationLayer.Items.Commands.DeleteItem;
+using ApplicationLayer.Items.Commands.UppdateItem;
 using ApplicationLayer.Items.Queries.GetCurrentItems;
 using ApplicationLayer.Items.Queries.GetItemById;
 using MediatR;
@@ -38,19 +40,19 @@ namespace API.Controllers
             return Ok(result);
         }
 
-        //[HttpPut("update/{id}")]
-        //public async Task<IActionResult> UpdateItem(int id, [FromBody] ItemDto itemDto)
-        //{
-        //    var result = await _mediator.Send(new UpdateItemCommand{ Id = id, Item = itemDto });
-        //    return Ok(result);
-        //}
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> UpdateItem(int id, [FromBody] ItemDto itemDto)
+        {
+            var result = await _mediator.Send(new UpdateItemCommand( id, itemDto));
+            return Ok(result);
+        }
 
-        //[HttpDelete("delete/{id}")]
-        //public async Task<IActionResult> DeleteItem(int id)
-        //{
-        //    var result = await _mediator.Send(new DeleteItemCommand{ Id = id });
-        //    return Ok(result);
-        //}
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> DeleteItem(int id)
+        {
+            var result = await _mediator.Send(new DeleteItemCommand(id));
+            return Ok(result);
+        }
 
 
 
