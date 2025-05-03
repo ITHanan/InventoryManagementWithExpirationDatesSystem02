@@ -11,7 +11,7 @@ namespace ApplicationLayer.Items.Queries.GetItemById
 {
     public class GetItemByIDQuery : IRequest<OperationResult<ItemDto>>
     {
-        public int Id { get; set; }
+        public int Id { get; }
 
         public GetItemByIDQuery(int id)
         {
