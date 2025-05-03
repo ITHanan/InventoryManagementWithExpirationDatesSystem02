@@ -1,6 +1,7 @@
 ﻿using ApplicationLayer.ACommen.DTOs;
 using ApplicationLayer.Items.Commands;
 using ApplicationLayer.Items.Queries.GetCurrentItems;
+using ApplicationLayer.Items.Queries.GetItemById;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,7 @@ namespace API.Controllers
         [HttpGet("get-by-id/{itemId}")]
         public async Task<IActionResult> GetItemById(int itemId)
         {
-            var result = await _mediator.Send(new GetItemByIDQuery());
+            var result = await _mediator.Send(new GetItemByIDQuery(itemId));
             return Ok(result);
         }
 
