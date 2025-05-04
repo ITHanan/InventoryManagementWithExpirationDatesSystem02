@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ApplicationLayer.Interfaces.IAuthRepository;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace ApplicationLayer
             services.AddMediatR(configuration => configuration.RegisterServicesFromAssemblies(assembly));
 
             services.AddAutoMapper(assembly);
+
 
             return services;
         }

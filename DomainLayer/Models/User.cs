@@ -9,12 +9,12 @@ namespace DomainLayer.Models
     public class User
     {
         public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string EmailAddress { get; set; }
-        public string Role { get; set; }
-        public string Surname { get; set; }// MR. Miss.
-        public string GivenName { get; set; }
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty ;
+        public string EmailAddress { get; set; } = string.Empty;
+        public string Role { get; set; } = "User";
+        public string Surname { get; set; } = string.Empty;// MR. Miss.
+        public string GivenName { get; set; } = string.Empty;
 
     }
 }

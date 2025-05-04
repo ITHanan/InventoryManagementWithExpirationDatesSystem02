@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ApplicationLayer.ACommen.DTOs;
+using DomainLayer;
+using MediatR;
 
-namespace ApplicationLayer.Stocks.Commands.UpdateStock
+namespace ApplicationLayer.Stocks.Commands
 {
-    internal class UpdateStockCommand
+    public class UpdateStockCommand : IRequest<OperationResult<StockDTO>>
     {
+        public StockDTO UpdatedStockDto { get; set; }
+
+        public UpdateStockCommand(StockDTO updatedStockDto)
+        {
+            UpdatedStockDto = updatedStockDto;
+        }
     }
 }

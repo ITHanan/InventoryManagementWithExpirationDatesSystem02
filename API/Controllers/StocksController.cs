@@ -1,7 +1,12 @@
 ﻿using ApplicationLayer.ACommen.DTOs;
 using ApplicationLayer.Items.Commands;
+using ApplicationLayer.Stocks.Commands;
 using ApplicationLayer.Stocks.Commands.CreateStocks;
+using ApplicationLayer.Stocks.Commands.DeletStock;
+using ApplicationLayer.Stocks.Queries;
+using ApplicationLayer.Stocks.Queries.GetCurrentStocks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,30 +25,30 @@ namespace API.Controllers
 
 
 
-        //[HttpGet]
-        //public async Task<IActionResult> GetAllStocks()
-        //{
-        //    var result = await _mediator.Send(new GetAllStockQuery());
-        //    if (!result.IsSuccess)
-        //        return BadRequest(result.ErrorMessage);
+        [HttpGet]
+        public async Task<IActionResult> GetAllStocks()
+        {
+            var result = await _mediator.Send(new GetAllStockQuery());
+            if (!result.IsSuccess)
+                return BadRequest(result.ErrorMessage);
 
-        //    return Ok(result);
-        //}
-
-
-
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetStockById(Guid id)
-        //{
-        //    var result = await _mediator.Send(new GetStockByIdQuery(id));
-        //    if (!result.IsSuccess)
-        //        return NotFound(result.ErrorMessage);
-
-        //    return Ok(result);
-        //}
+            return Ok(result);
+        }
 
 
-        [HttpPost]
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetStockById(int id)
+        {
+            var result = await _mediator.Send(new GetStockByIdQuery(id));
+            if (!result.IsSuccess)
+                return NotFound(result.ErrorMessage);
+
+            return Ok(result);
+        }
+
+
+        [Authorize(Roles = "Admin")]
         [HttpPost("add")]
         public async Task<IActionResult> AddItem([FromBody] StockDTO stockDto)
         {
@@ -51,27 +56,27 @@ namespace API.Controllers
             return Ok(result);
         }
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> UpdateStock(Guid id, [FromBody] StockDto stockDto)
-        //{
-        //    if (id != stockDto.StockId)
-        //        return BadRequest("Mismatched Stock ID");
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateStock(int id, [FromBody] StockDTO stockDto)
+        {
+            if (id != stockDto.StockId)
+                return BadRequest("Mismatched Stock ID");
 
-        //    var result = await _mediator.Send(new UpdateStockCommand(stockDto));
-        //    if (!result.IsSuccess)
-        //        return BadRequest(result.ErrorMessage);
+            var result = await _mediator.Send(new UpdateStockCommand(stockDto));
+            if (!result.IsSuccess)
+                return BadRequest(result.ErrorMessage);
 
-        //    return Ok(result);
-        //}
+            return Ok(result);
+        }
 
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteStock(Guid id)
-        //{
-        //    var result = await _mediator.Send(new DeleteStockCommand(id));
-        //    if (!result.IsSuccess)
-        //        return NotFound(result.ErrorMessage);
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteStock(int id)
+        {
+            var result = await _mediator.Send(new DeleteStockCommand(id));
+            if (!result.IsSuccess)
+                return NotFound(result.ErrorMessage);
 
-        //    return Ok(result);
-        //}
+            return Ok(result);
+        }
     }
 }
