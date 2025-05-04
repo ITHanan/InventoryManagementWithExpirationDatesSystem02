@@ -5,6 +5,7 @@ using ApplicationLayer.Suppliers.Commands.UpdateSupplier;
 using ApplicationLayer.Suppliers.Queries.GerSupplierByID;
 using ApplicationLayer.Suppliers.Queries.GetCurrentSuppliers;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,7 @@ namespace API.Controllers
         }
 
         // GET: api/supplier
+        [Authorize]
         [HttpGet("Get-All-Supplier")]
         public async Task<IActionResult> GetAll()
         {
@@ -30,6 +32,7 @@ namespace API.Controllers
         }
 
         // GET: api/supplier/{id}
+        [Authorize]
         [HttpGet("{id} Get-Supplier-By-ID")]
         public async Task<IActionResult> GetById(int id)
         {

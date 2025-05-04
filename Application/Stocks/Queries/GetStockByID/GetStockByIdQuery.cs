@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ApplicationLayer.ACommen.DTOs;
+using DomainLayer;
+using MediatR;
+using System;
 
-namespace ApplicationLayer.Stocks.Queries.GetStockByID
+namespace ApplicationLayer.Stocks.Queries
 {
-    internal class GetStockByIdQuery
+    public class GetStockByIdQuery : IRequest<OperationResult<StockDTO>>
     {
+        public int StockId { get; }
+
+        public GetStockByIdQuery(int stockId)
+        {
+            StockId = stockId;
+        }
     }
 }

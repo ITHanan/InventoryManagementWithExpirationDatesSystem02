@@ -1,5 +1,7 @@
-﻿using ApplicationLayer.Interfaces.IGenericIRepository;
+﻿using ApplicationLayer.Interfaces.IAuthRepository;
+using ApplicationLayer.Interfaces.IGenericIRepository;
 using ApplicationLayer.Interfaces.ItemInterface;
+using ApplicationLayer.Interfaces.Repositories;
 using infrastructureLayer.Database;
 using infrastructureLayer.Repositories;
 using InfrastructureLayer.Repositories;
@@ -30,6 +32,14 @@ namespace infrastructureLayer
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
+
+
+
+            services.AddScoped<AuthRepository>();
+
 
             return services;
         }

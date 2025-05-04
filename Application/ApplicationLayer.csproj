@@ -7,16 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ACommen\Helpers\" />
-    <Folder Include="Interfaces\UserInterface\" />
     <Folder Include="Interfaces\SopplierInterface\" />
     <Folder Include="Interfaces\StockInterface\" />
-    <Folder Include="Users\Queries\GetCurrentUsers\" />
-    <Folder Include="Users\Commands\CreateUsers\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
     <PackageReference Include="MediatR" Version="12.5.0" />
   </ItemGroup>
 

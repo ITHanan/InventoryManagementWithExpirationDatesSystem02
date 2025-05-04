@@ -1,6 +1,10 @@
+﻿using API.Authorazation;
+using API.Swagger;
 using ApplicationLayer;
 using infrastructureLayer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 
 namespace API
@@ -21,6 +25,13 @@ namespace API
             builder.Services.AddApplication();
             builder.Services.AddInfrastructure(builder.Configuration);
 
+
+            builder.Services.AddJwtAuthentication(builder.Configuration);
+
+            builder.Services.AddSwaggerWithJwt();
+            builder.Services.AddAuthorization();
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -29,6 +40,8 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+
 
             app.UseHttpsRedirection();
 

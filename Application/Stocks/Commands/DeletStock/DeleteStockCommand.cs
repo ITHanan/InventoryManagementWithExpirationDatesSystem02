@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DomainLayer;
+using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,14 @@ using System.Threading.Tasks;
 
 namespace ApplicationLayer.Stocks.Commands.DeletStock
 {
-    internal class DeleteStockCommand
+    public class DeleteStockCommand : IRequest<OperationResult<bool>>
     {
+        public int StockId { get; set; }
+
+        public DeleteStockCommand(int stockId)
+        {
+            StockId = stockId;
+        }
+
     }
 }
