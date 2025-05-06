@@ -1,10 +1,7 @@
-﻿using ApplicationLayer.Interfaces.IAuthRepository;
+﻿using ApplicationLayer.ACommen.Behaviers;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApplicationLayer
 {
@@ -12,14 +9,20 @@ namespace ApplicationLayer
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            // Mediator CQRA pattern 
-
             var assembly = typeof(DependencyInjection).Assembly;
 
-            services.AddMediatR(configuration => configuration.RegisterServicesFromAssemblies(assembly));
-
+            // Register MediatR handlers
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assembly));
+            // Register AutoMapper profiles
             services.AddAutoMapper(assembly);
+            // Register all FluentValidation validators in the assembly
+            services.AddValidatorsFromAssembly(assembly);
 
+            // Register MediatR pipeline behaviors
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+
+            
 
             return services;
         }

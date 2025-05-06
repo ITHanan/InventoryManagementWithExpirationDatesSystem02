@@ -1,15 +1,15 @@
 ﻿using ApplicationLayer.Interfaces.IAuthRepository;
+using ApplicationLayer.Users.Queries;
+using ApplicationLayer.Users.Queries.UsersLogin;
+using DomainLayer;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
-
-namespace ApplicationLayer.Users.Queries.UsersLogin
+namespace ApplicationLayer.Users.Handlers
 {
-    internal class LoginUserQueryHandler : IRequestHandler<LoginUserQuery, string>
+    public class LoginUserQueryHandler : IRequestHandler<LoginUserQuery, OperationResult<string>>
     {
         private readonly IAuthRepository _authRepository;
 
@@ -18,20 +18,34 @@ namespace ApplicationLayer.Users.Queries.UsersLogin
             _authRepository = authRepository;
         }
 
-        public Task<string> Handle(LoginUserQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<string>> Handle(LoginUserQuery request, CancellationToken cancellationToken)
         {
-            var user = _authRepository.AuthenticateUser(request.LoginUser.Username, request.LoginUser.Password);
+           
+                var user = await _authRepository.AuthenticateUser(request.Username, request.Password);
 
-            if (user == null)
-            {
-                throw new UnauthorizedAccessException("Invalid username or password");
-            }
+                if (!user.IsSuccess|| user.Data == null)
+                {
+                    return OperationResult<string>.Failure(user.ErrorMessage ?? "Invalid username or password.");
+                }
 
-            string token = _authRepository.JWTTokenGenerator(user.Result.Username, user.Result.EmailAddress, user.Result.Role);
 
-            return Task.FromResult(token);
+              
+
+                var token = _authRepository.JWTTokenGenerator(user.Data.Username, user.Data.EmailAddress, user.Data.Role);
+
+                if (!token.IsSuccess)
+                {
+
+                   return OperationResult<string>.Failure(token.ErrorMessage ?? "Failed to generate Token");
+
+                }
+
+                return OperationResult<string>.Success(token.Data);
+         
+            
+                
+            
         }
     }
-    
-    
 }
+

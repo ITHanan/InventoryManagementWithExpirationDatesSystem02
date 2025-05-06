@@ -1,20 +1,18 @@
 ﻿using ApplicationLayer.ACommen.Users;
+using DomainLayer;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ApplicationLayer.Users.Queries.UsersLogin
+namespace ApplicationLayer.Users.Queries
 {
-    public class LoginUserQuery : IRequest<string>
+    public class LoginUserQuery : IRequest<OperationResult<string>>
     {
-        public LoginUserQuery(UserCredentialsDto loginUser)
-        {
-            LoginUser = loginUser;
-        }
+        public string Username { get; set; }
+        public string Password { get; set; }
 
-        public UserCredentialsDto LoginUser { get; }
+        public LoginUserQuery(string username, string password)
+        {
+            Username = username;
+            Password = password;
+        }
     }
 }

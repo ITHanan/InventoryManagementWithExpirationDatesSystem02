@@ -1,6 +1,8 @@
 ﻿using ApplicationLayer.ACommen.Users;
 using ApplicationLayer.Users.Commands.CreateUsers;
+using ApplicationLayer.Users.Queries;
 using ApplicationLayer.Users.Queries.UsersLogin;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,37 +25,28 @@ namespace API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            var result = await _mediator.Send(command);
 
-            try
-            {
-                var token = await _mediator.Send(command);
-                return Ok(new TokenDto { TokenValue = token });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Registration failed: {ex.Message}");
-            }
+            if (!result.IsSuccess)
+                return BadRequest(result.ErrorMessage);
+
+            return Ok(new TokenDto { TokenValue = result.Data! });
         }
+
+
 
         [HttpPost("logIn")]
-        [ProducesResponseType(typeof(TokenDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> Login([FromBody] UserCredentialsDto userToLogin)
+        public async Task<IActionResult> Login([FromBody] LoginUserQuery loginQuery)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            var result = await _mediator.Send(loginQuery);
 
-            try
+            if (!result.IsSuccess)
             {
-                string token = await _mediator.Send(new LoginUserQuery(userToLogin));
-                return Ok(new TokenDto { TokenValue = token });
+                return Unauthorized(result); // or BadRequest depending on your logic
             }
-            catch (Exception)
-            {
-                return Unauthorized("Invalid username or password.");
-            }
+
+            return Ok(new TokenDto { TokenValue = result.Data });
         }
+
     }
 }

@@ -1,11 +1,11 @@
 ﻿using DomainLayer.Models;
-using System.Threading.Tasks;
+using DomainLayer;
 
 namespace ApplicationLayer.Interfaces.IAuthRepository
 {
     public interface IAuthRepository
     {
-        Task<User> AuthenticateUser(string username, string password);
-        string JWTTokenGenerator(string username, string email = "", string role = "Admin");
+        Task<OperationResult<User>> AuthenticateUser(string username, string password);
+        OperationResult<string> JWTTokenGenerator(string username, string email = "", string role = "Admin");
     }
 }
