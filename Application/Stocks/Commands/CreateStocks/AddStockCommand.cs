@@ -11,7 +11,7 @@ namespace ApplicationLayer.Stocks.Commands.CreateStocks
 {
     public class AddStockCommand : IRequest<OperationResult<StockDTO>>
     {
-        public StockDTO StockDto { get; set; }
+        public StockDTO StockDto { get; }
 
         public AddStockCommand(StockDTO stockDto)
         {

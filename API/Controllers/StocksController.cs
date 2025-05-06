@@ -47,8 +47,8 @@ namespace API.Controllers
             return Ok(result);
         }
 
+       // [Authorize(Roles = "Admin,User")]
 
-        [Authorize(Roles = "Admin")]
         [HttpPost("add")]
         public async Task<IActionResult> AddItem([FromBody] StockDTO stockDto)
         {

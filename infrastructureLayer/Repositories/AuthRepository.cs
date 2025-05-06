@@ -1,5 +1,6 @@
 ﻿using ApplicationLayer.Interfaces.IAuthRepository;
 using AutoMapper;
+using DomainLayer;
 using DomainLayer.Models;
 using infrastructureLayer.Database;
 using Microsoft.EntityFrameworkCore;
@@ -21,27 +22,33 @@ namespace InfrastructureLayer.Repositories
 
         public AuthRepository(IConfiguration configuration, AppDbContext dbContext)
         {
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            _configuration = configuration;// ?? throw new ArgumentNullException(nameof(configuration));
+            _dbContext = dbContext;// ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        public async Task<User> AuthenticateUser(string username, string password)
+        public async Task<OperationResult<User>> AuthenticateUser(string username, string password)
         {
+            //if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            //{
+            //    return OperationResult<User>.Failure("Username and password are required.");
+            //}
+
             var user = await _dbContext.Users
                 .FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
 
             if (user == null)
             {
-                throw new Exception("User not found or invalid credentials");
+                return null;
             }
 
-            return user;
+            return OperationResult<User>.Success(user);
         }
 
-        public string JWTTokenGenerator(string username, string email = "", string role = "Admin")
+
+        public OperationResult<string> JWTTokenGenerator(string username, string email = "", string role = "Admin")
         {
             if (string.IsNullOrWhiteSpace(username))
-                throw new ArgumentNullException(nameof(username), "Username cannot be null or empty");
+                return OperationResult<string>.Failure("Username cannot be null or empty");
 
             var jwtSettings = _configuration.GetSection("JWT");
 
@@ -55,29 +62,37 @@ namespace InfrastructureLayer.Repositories
                 string.IsNullOrWhiteSpace(audience) ||
                 string.IsNullOrWhiteSpace(expireMinutes))
             {
-                throw new InvalidOperationException("One or more JWT configuration values are missing in appsettings.json.");
+                return OperationResult<string>.Failure("One or more JWT configuration values are missing in appsettings.json.");
             }
 
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var claims = new List<Claim>
+            try
             {
-                new Claim(ClaimTypes.Name, username),
-                new Claim(ClaimTypes.Email, email),
-                new Claim(ClaimTypes.Role, role),
-            };
+                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(
-                issuer: issuer,
-                audience: audience,
-                claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(double.Parse(expireMinutes)),
-                signingCredentials: credentials
-            );
+                var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, username),
+            new Claim(ClaimTypes.Email, email),
+            new Claim(ClaimTypes.Role, role),
+        };
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                var token = new JwtSecurityToken(
+                    issuer: issuer,
+                    audience: audience,
+                    claims: claims,
+                    expires: DateTime.UtcNow.AddMinutes(double.Parse(expireMinutes)),
+                    signingCredentials: credentials
+                );
+
+                return OperationResult<string>.Success(new JwtSecurityTokenHandler().WriteToken(token));
+            }
+            catch (Exception ex)
+            {
+                return OperationResult<string>.Failure($"Token generation failed: {ex.Message}");
+            }
         }
+
     }
 }
 

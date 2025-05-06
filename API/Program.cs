@@ -1,6 +1,7 @@
 ﻿using API.Authorazation;
 using API.Swagger;
 using ApplicationLayer;
+using ApplicationLayer.Users.Queries.UsersLogin;
 using infrastructureLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
