@@ -3,6 +3,7 @@ using API.Swagger;
 using ApplicationLayer;
 using ApplicationLayer.Users.Queries.UsersLogin;
 using infrastructureLayer;
+using infrastructureLayer.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -34,6 +35,9 @@ namespace API
 
 
             var app = builder.Build();
+
+
+           
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

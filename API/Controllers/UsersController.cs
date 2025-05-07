@@ -42,7 +42,7 @@ namespace API.Controllers
 
             if (!result.IsSuccess)
             {
-                return Unauthorized(result); // or BadRequest depending on your logic
+                return Unauthorized(result); 
             }
 
             return Ok(new TokenDto { TokenValue = result.Data });

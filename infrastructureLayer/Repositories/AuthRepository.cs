@@ -22,16 +22,16 @@ namespace InfrastructureLayer.Repositories
 
         public AuthRepository(IConfiguration configuration, AppDbContext dbContext)
         {
-            _configuration = configuration;// ?? throw new ArgumentNullException(nameof(configuration));
-            _dbContext = dbContext;// ?? throw new ArgumentNullException(nameof(dbContext));
+            _configuration = configuration; 
+            _dbContext = dbContext;
         }
 
         public async Task<OperationResult<User>> AuthenticateUser(string username, string password)
         {
-            //if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-            //{
-            //    return OperationResult<User>.Failure("Username and password are required.");
-            //}
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            {
+                return OperationResult<User>.Failure("Username and password are required.");
+            }
 
             var user = await _dbContext.Users
                 .FirstOrDefaultAsync(u => u.Username == username && u.Password == password);

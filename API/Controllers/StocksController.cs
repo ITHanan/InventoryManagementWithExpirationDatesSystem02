@@ -47,10 +47,10 @@ namespace API.Controllers
             return Ok(result);
         }
 
-       // [Authorize(Roles = "Admin,User")]
 
+       // [Authorize]
         [HttpPost("add")]
-        public async Task<IActionResult> AddItem([FromBody] StockDTO stockDto)
+        public async Task<IActionResult> AddStock([FromBody] StockDTO stockDto)
         {
             var result = await _mediator.Send(new AddStockCommand(stockDto));
             return Ok(result);

@@ -10,6 +10,8 @@
 
         public string? PhoneNumber { get; set; }
 
+        public string? Email { get; set; }
+
         public virtual ICollection<Stock> Stocks { get; set; } //= new List<Stock>();
 
     }
