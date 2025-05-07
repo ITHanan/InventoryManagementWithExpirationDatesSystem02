@@ -1,0 +1,557 @@
+{
+	"info": {
+		"_postman_id": "828b1202-2ba9-48ae-ab31-64fe3e86187e",
+		"name": "InventoryManagementWithExpirationDatesSystem02",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43161764"
+	},
+	"item": [
+		{
+			"name": "Items",
+			"item": [
+				{
+					"name": "GET Requests",
+					"item": [
+						{
+							"name": "GET - All Items",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiSGFuYW4iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJIYW5hbkBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNzQ2NjA3MTE1LCJpc3MiOiJNeUFwcCIsImF1ZCI6Ik15QXBwVXNlcnMifQ.gDt_zFFujHs6JBJTqUUt9HyiFK8AdEV0Y49CsgK7EbY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7138/api/Items/Get-All-Item",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7138",
+									"path": [
+										"api",
+										"Items",
+										"Get-All-Item"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET - Item By ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7138/api/Items/get-by-id/2",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7138",
+									"path": [
+										"api",
+										"Items",
+										"get-by-id",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST Requests",
+					"item": [
+						{
+							"name": "Create a post",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\t{\r\n    \"itemId\": 0,\r\n    \"itemName\": \"Mobile\",\r\n    \"category\": \"Iphone\",\r\n    \"unitPrice\": 7090\r\n  }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7138/api/Items/add",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7138",
+									"path": [
+										"api",
+										"Items",
+										"add"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT - Requests",
+					"item": [
+						{
+							"name": "Create a post",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"itemId\": 2,\r\n    \"itemName\": \"bread\",\r\n    \"category\": \"new\",\r\n    \"unitPrice\": 10\r\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7138/api/Items/update/2",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7138",
+									"path": [
+										"api",
+										"Items",
+										"update",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE - Requests",
+					"item": [
+						{
+							"name": "https://localhost:7031/api/Items/12",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7138/api/Items/delete/4",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7138",
+									"path": [
+										"api",
+										"Items",
+										"delete",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Stocks",
+			"item": [
+				{
+					"name": "GET - Requests",
+					"item": [
+						{
+							"name": "Get - All Stock",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7138/api/Stocks",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7138",
+									"path": [
+										"api",
+										"Stocks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get - stock by ID",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7138/api/Stocks/3",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7138",
+									"path": [
+										"api",
+										"Stocks",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST - Requests",
+					"item": [
+						{
+							"name": "https://localhost:7031/api/Stocks/1",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"stockId\": 0,\r\n  \"itemId\": 2,\r\n  \"supplierId\": 1,\r\n  \"quantity\": 444,\r\n  \"expiryDate\": \"2025-12-04T20:40:43.955Z\",\r\n  \"receivedDate\": \"2025-04-04T20:40:43.955Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7138/api/Stocks/add",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7138",
+									"path": [
+										"api",
+										"Stocks",
+										"add"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT - Requests",
+					"item": [
+						{
+							"name": "Put - stock",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiSGFuYW4iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJIYW5hbkBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNzQ2NjA5MjY0LCJpc3MiOiJNeUFwcCIsImF1ZCI6Ik15QXBwVXNlcnMifQ.w9CWiJBu6h4tIvlMnFfTIJ9LtFF2Hbthj6u8Fs374sU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"stockId\": 2,\r\n  \"itemId\": 2,\r\n  \"supplierId\": 1,\r\n  \"quantity\": 111,\r\n  \"expiryDate\": \"2025-11-04T20:40:43.955Z\",\r\n  \"receivedDate\": \"2025-04-04T20:40:43.955Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7138/api/Stocks/2",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7138",
+									"path": [
+										"api",
+										"Stocks",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE - Requests",
+					"item": [
+						{
+							"name": "Delete - stock",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"stockId\": 0,\r\n  \"itemId\": 3334,\r\n  \"supplierId\": 2,\r\n  \"quantity\": 444,\r\n  \"expiryDate\": \"2025-12-04T20:40:43.955Z\",\r\n  \"receivedDate\": \"2025-04-04T20:40:43.955Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7138/api/Stocks/3",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7138",
+									"path": [
+										"api",
+										"Stocks",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Suppliers",
+			"item": [
+				{
+					"name": "GET - Requests",
+					"item": [
+						{
+							"name": "Get - all Supplier",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiSGFuYW4iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJIYW5hbkBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNzQ2NjEwMTUxLCJpc3MiOiJNeUFwcCIsImF1ZCI6Ik15QXBwVXNlcnMifQ.fvai7KMtdaajg7xstczqkKn6e80PG16j1xfPmjGYBCQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7138/api/Supplier/Get-All-Supplier",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7138",
+									"path": [
+										"api",
+										"Supplier",
+										"Get-All-Supplier"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get - ByIdSupplier",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiSGFuYW4iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJIYW5hbkBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNzQ2NjEwMTUxLCJpc3MiOiJNeUFwcCIsImF1ZCI6Ik15QXBwVXNlcnMifQ.fvai7KMtdaajg7xstczqkKn6e80PG16j1xfPmjGYBCQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7138/api/Supplier/5 Get-Supplier-By-ID",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7138",
+									"path": [
+										"api",
+										"Supplier",
+										"5 Get-Supplier-By-ID"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST - Requests",
+					"item": [
+						{
+							"name": "Post - sopplier",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n{\r\n  \"supplierId\": 0,\r\n  \"supplierName\": \"Lina\",\r\n  \"contactPerson\": \"Jiji\",\r\n  \"phoneNumber\": \"+987654321234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7138/api/Supplier/Add-Supplier",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7138",
+									"path": [
+										"api",
+										"Supplier",
+										"Add-Supplier"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT - Requests",
+					"item": [
+						{
+							"name": "Put - Supplier",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiSGFuYW4iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJIYW5hbkBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNzQ2NjIzMTg3LCJpc3MiOiJNeUFwcCIsImF1ZCI6Ik15QXBwVXNlcnMifQ.XaQ_ZURTMMOaAEtqhlDKeIdpPIiVZTEgQD-KLFuMoKo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"supplierId\": 9,\r\n  \"supplierName\": \"Lina\",\r\n  \"contactPerson\": \"Maya\",\r\n  \"phoneNumber\": \"7585958504\",\r\n  \"email\": \"Maya@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7138/api/Supplier/9 Update-supplier",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7138",
+									"path": [
+										"api",
+										"Supplier",
+										"9 Update-supplier"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE - Requests",
+					"item": [
+						{
+							"name": "Delete - supplier",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7138/api/Supplier/9 Delete-Supplier",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7138",
+									"path": [
+										"api",
+										"Supplier",
+										"9 Delete-Supplier"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
