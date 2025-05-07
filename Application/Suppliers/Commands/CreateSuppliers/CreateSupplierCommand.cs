@@ -11,7 +11,10 @@ namespace ApplicationLayer.Suppliers.Commands.CreateSuppliers
 {
     public class CreateSupplierCommand : IRequest<OperationResult<SupplierDto>>
     {
+        public string supplierName;
+
         public SupplierDto SupplierDto { get; set; }
+        public string Email { get; set; }
 
         public CreateSupplierCommand(SupplierDto dto)
         {

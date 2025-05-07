@@ -17,7 +17,7 @@ namespace infrastructureLayer.Database
 
         public virtual DbSet<Stock> Stocks { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
-        public DbSet<User> Users { get; set; } // Add DbSet for User
+        public DbSet<User> Users { get; set; } 
 
     }
 }

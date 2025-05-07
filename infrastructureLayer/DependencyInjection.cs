@@ -20,8 +20,7 @@ namespace infrastructureLayer
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configration)
         {
-            // Register all services, packages, dependence osv...
-            // DB + repository
+            
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(configration.GetConnectionString("HananCleanArchitectureDbString"));
@@ -35,9 +34,7 @@ namespace infrastructureLayer
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
-
-
-
+         
             services.AddScoped<AuthRepository>();
 
 

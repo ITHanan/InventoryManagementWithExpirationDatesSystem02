@@ -33,7 +33,7 @@ namespace ApplicationLayer.Users.Commands.CreateUsers
             var user = new User
             {
                 Username = request.UserName,
-                Password = request.UserPassword, // Consider hashing in production
+                Password = request.UserPassword, // I will Consider hashing in production
                 EmailAddress = request.Email,
                 Role = "User"
             };
